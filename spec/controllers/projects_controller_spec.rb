@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
+
 describe ProjectsController do
 
   it "display an error for a missing project" do
