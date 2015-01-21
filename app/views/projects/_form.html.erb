@@ -1,4 +1,9 @@
 <%= form_for @project do |f| %>
+    <% unless @project.errors.empty? %>
+        <% @project.errors.full_messages.each do |e| %>
+            <%= "*#{e}" %>
+        <% end %>
+    <% end %>
     <p>
       <%= f.label :name %>
       <%= f.text_field :name %>
