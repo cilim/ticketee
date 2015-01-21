@@ -5,7 +5,6 @@
   <% @projects.each do |project| %>
      <li>
        <%= link_to project.name, project %>
-       <%= link_to 'Edit', edit_project_path(project) %>
      </li>
   <% end %>
 </ul>
