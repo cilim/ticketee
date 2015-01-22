@@ -4,8 +4,17 @@ feature 'Creating Tickets' do
 
   before do
     project = FactoryGirl.create(:project, name: "Marko")
+    user = FactoryGirl.create(:user)
     visit "/"
-    click_link "Marko"
+    click_link project.name
+    click_link "New ticket"
+    expect(page).to have_content("You need to sign in before continuing")
+
+    fill_in "Email"
+    fill_in "Password"
+    click_button "Sign in"
+
+    click_link project.name
     click_link "New ticket"
   end
 
@@ -15,6 +24,9 @@ feature 'Creating Tickets' do
     click_button "Create Ticket"
 
     expect(page).to have_content("Ticket is successfully created")
+    within "#ticket #author" do
+      expect(page).to have_content("Created by sample@example.com")
+    end
   end
 
   scenario 'creating a ticket without valid attributes' do
