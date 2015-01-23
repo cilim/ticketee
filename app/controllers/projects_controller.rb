@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authorize_admin!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :error_not_found
 
@@ -54,6 +55,14 @@ class ProjectsController < ApplicationController
 
     def set_project
       @project = Project.find(params[:id])
+    end
+
+    def authorize_admin!
+      require_signin!
+
+      unless current_user.admin
+        redirect_to root_path, alert: 'You must be an admin to do that'
+      end
     end
 
 end

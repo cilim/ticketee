@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 feature 'Deleting projects' do
+  before do
+    sign_in_as!(FactoryGirl.create(:admin_user))
+  end
   scenario 'deleting a project' do
     project = FactoryGirl.create(:project, name: "Marko")
     visit '/'
