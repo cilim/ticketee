@@ -4,6 +4,7 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'support/authentication_helpers'
+require 'support/capybara_helpers'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -51,4 +52,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include(AuthenticationHelpers)
+  config.include(CapybaraHelpers)
 end
