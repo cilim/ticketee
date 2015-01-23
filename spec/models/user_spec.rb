@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "User" do
   describe "passwords" do
     it "needs a password to be valid" do
-      u = User.new(name: "Marko")
+      u = User.new(name: "Marko", email: "os.chilim@gmail.com")
       u.save
       expect(u).to_not be_valid
 

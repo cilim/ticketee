@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Signing in' do
   scenario 'user sign in' do
-    user = FactoryGirl.create(:user)
+    user = FactoryGirl.create(:user, email: "os.chilim@gmail.com")
 
     visit '/'
     click_link 'Sign in'

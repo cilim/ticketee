@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Creating users' do
-  let!(:admin) { FactoryGirl.create(:admin_user)}
+  let!(:admin) { FactoryGirl.create(:admin_user, email: "os.chilim@gmail.com")}
   before do
     sign_in_as!(admin)
     visit '/'
