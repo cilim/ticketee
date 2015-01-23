@@ -8,11 +8,12 @@ feature 'Creating Tickets' do
     visit "/"
     click_link project.name
     click_link "New ticket"
-    expect(page).to have_content("You need to sign in before continuing")
+    expect(page).to have_content("You need to sign in or sign up before continuing.")
 
-    fill_in "Email"
-    fill_in "Password"
+    fill_in "Email", with: 'os.chilim@gmail.com'
+    fill_in "Password", with: 'adminadmin'
     click_button "Sign in"
+    visit '/'
 
     click_link project.name
     click_link "New ticket"
@@ -25,7 +26,7 @@ feature 'Creating Tickets' do
 
     expect(page).to have_content("Ticket is successfully created")
     within "#ticket #author" do
-      expect(page).to have_content("Created by sample@example.com")
+      expect(page).to have_content("Created by os.chilim@gmail.com")
     end
   end
 
