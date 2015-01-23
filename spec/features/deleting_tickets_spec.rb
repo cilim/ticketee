@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 feature 'Deleting tickets' do
   let!(:project) { FactoryGirl.create(:project) }
   let!(:user) { FactoryGirl.create(:user) }
@@ -6,6 +6,7 @@ feature 'Deleting tickets' do
 
   before do
     sign_in_as!(user)
+    define_permission!(user, "view", project)
     visit '/'
     click_link project.name
     click_link ticket.title

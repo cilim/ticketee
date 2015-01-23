@@ -3,18 +3,12 @@ require 'rails_helper'
 feature 'Creating Tickets' do
 
   before do
-    project = FactoryGirl.create(:project, name: "Marko")
-    user = FactoryGirl.create(:user, email: "os.chilim@gmail.com")
+    project = FactoryGirl.create(:project)
+    user = FactoryGirl.create(:user)
+    define_permission!(user, "view", project)
+    @email = user.email
+    sign_in_as!(user)
     visit "/"
-    click_link project.name
-    click_link "New ticket"
-    expect(page).to have_content("You need to sign in or sign up before continuing.")
-
-    fill_in "Email", with: 'os.chilim@gmail.com'
-    fill_in "Password", with: 'adminadmin'
-    click_button "Sign in"
-    visit '/'
-
     click_link project.name
     click_link "New ticket"
   end
@@ -26,7 +20,7 @@ feature 'Creating Tickets' do
 
     expect(page).to have_content("Ticket is successfully created")
     within "#ticket #author" do
-      expect(page).to have_content("Created by os.chilim@gmail.com")
+      expect(page).to have_content("Created by #{@email}")
     end
   end
 

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  scope :admins, ->{ where(:admin => true) }
+
   validates :email, presence: true
 
   def to_s

@@ -12,6 +12,7 @@ feature "Editing tickets" do
 
   before do
     sign_in_as!(user)
+    define_permission!(user, "view", project)
     visit '/'
     click_link project.name
     click_link ticket.title
