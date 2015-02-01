@@ -9,6 +9,13 @@ feature 'Viewing projects' do
     define_permission!(user, :view, project)
   end
 
+  scenario 'user cannot see project not defined for him' do
+    FactoryGirl.create(:project, name: "Hidden")
+    visit '/'
+    expect(page).to_not have_content("Hidden")
+    click_link project.name
+  end
+
   scenario 'view all projects' do
     visit '/'
     click_link project.name
